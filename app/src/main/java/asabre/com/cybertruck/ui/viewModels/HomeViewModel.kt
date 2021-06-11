@@ -22,6 +22,8 @@ object HomeViewModel : ViewModel()  {
     var driveGear = MutableLiveData<Int>(0)
     var brakeVariable = MutableLiveData(0)
     var luda = MutableLiveData<Boolean>(false)
+    var batteryPercentage = MutableLiveData<String>()
+    var suspensionFlow = MutableLiveData<Boolean>(false)
 
 
     fun mapRange(number: Int, prevRange: IntRange, newRange: IntRange) : Int {

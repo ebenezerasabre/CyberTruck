@@ -28,9 +28,7 @@
         android:src="@drawable/ic_outline_bluetooth_24"
         app:layout_constraintEnd_toEndOf="@id/settings"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#d0d0d0"
-
-        />
+        app:tint="#d0d0d0" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvConnected"
@@ -50,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
-        android:src="@drawable/ic_baseline_battery_full_24"
+        android:src="@drawable/ic_baseline_battery_empty_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,9 +71,9 @@
         android:layout_marginTop="100dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        >
 
         <info.hoang8f.android.segmented.SegmentedGroup
             xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
@@ -204,7 +202,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
         >
 
 

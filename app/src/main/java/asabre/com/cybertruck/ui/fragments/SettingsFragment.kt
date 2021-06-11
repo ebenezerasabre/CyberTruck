@@ -88,7 +88,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
 
     fun sendCommand(input: String){
-        controlClass.sendCommand(input)
+        /**
+         * connected
+         */
+//        controlClass.sendCommand(input)
     }
 
 
@@ -98,7 +101,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             .Builder(requireContext())
             .setTitle("Pick Theme")
             .setColorShape(ColorShape.CIRCLE)
-            .setDefaultColor(R.color.red_100)
+            .setDefaultColor(R.color.purple_700)
             .setColorListener{color, colorHex ->
                 // Handle Color Selection
                 Log.d(TAG, "colorPicker: Selected color is $color")
@@ -130,33 +133,8 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
 
-//    override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-//        Log.d(TAG, "onTouch: called")
-//        when(p0?.id){
-//            R.id.fl -> {   susPensionCall("fl", p1) }
-//            R.id.fr -> {   susPensionCall("fr", p1) }
-//            R.id.rl -> {   susPensionCall("rl", p1) }
-//            R.id.rr -> {   susPensionCall("rr", p1) }
-//
-//        }
-//            return false
-//        }
 
     private fun setSuspensions(){
-//        val susLister: View.OnTouchListener = View.OnTouchListener { view, motionEvent ->
-//            when(view?.id){
-//                R.id.fl -> {   susPensionCall("fl", motionEvent) }
-//                R.id.fr -> {   susPensionCall("fr", motionEvent) }
-//                R.id.rl -> {   susPensionCall("rl", motionEvent) }
-//                R.id.rr -> {   susPensionCall("rr", motionEvent) }
-//            }
-//            return@OnTouchListener true
-//        }
-
-//        _binding.fl.setOnTouchListener(susLister)
-//        _binding.fr.setOnTouchListener(susLister)
-//        _binding.rl.setOnTouchListener(susLister)
-//        _binding.rr.setOnTouchListener(susLister)
 
         flClick()
         frClick()
@@ -172,9 +150,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             when (view?.id) {
                 R.id.fl -> {
                     if (motionEvent?.action == ACTION_DOWN) {
-                        Log.d(TAG, "onTouchDown ")
-                        sendCommand(String.format("F1#"))
+                        while (HomeViewModel.suspensionFlow.value == true){
+                            Log.d(TAG, "onTouchDown ")
+                            sendCommand(String.format("F1#"))
+                        }
                     } else if (motionEvent?.action == ACTION_UP) {
+                        HomeViewModel.suspensionFlow.postValue(false)
                         Log.d(TAG, "onTouchDown ")
                         sendCommand(String.format("F0#"))
                     }
@@ -190,9 +171,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             when (view?.id) {
                 R.id.fr -> {
                     if (motionEvent?.action == ACTION_DOWN) {
-                        Log.d(TAG, "onTouchDown ")
-                        sendCommand(String.format("F2#"))
+                        while (HomeViewModel.suspensionFlow.value == true){
+                            Log.d(TAG, "onTouchDown ")
+                            sendCommand(String.format("F2#"))
+                        }
                     } else if (motionEvent?.action == ACTION_UP) {
+                        HomeViewModel.suspensionFlow.postValue(false)
                         Log.d(TAG, "onTouchDown ")
                         sendCommand(String.format("F0#"))
                     }
@@ -208,9 +192,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             when (view?.id) {
                 R.id.rl -> {
                     if (motionEvent?.action == ACTION_DOWN) {
-                        Log.d(TAG, "onTouchDown ")
-                        sendCommand(String.format("R1#"))
+                        while (HomeViewModel.suspensionFlow.value == true){
+                            Log.d(TAG, "onTouchDown ")
+                            sendCommand(String.format("R1#"))
+                        }
                     } else if (motionEvent?.action == ACTION_UP) {
+                        HomeViewModel.suspensionFlow.postValue(false)
                         Log.d(TAG, "onTouchDown ")
                         sendCommand(String.format("R0#"))
                     }
@@ -223,13 +210,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun rrClick(){
         _binding.rr.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
             Log.d(TAG, "setSuspensions: called")
+            HomeViewModel.suspensionFlow.postValue(true)
             when (view?.id) {
                 R.id.rr -> {
                     if (motionEvent?.action == ACTION_DOWN) {
-                        Log.d(TAG, "onTouchDown ")
-                        sendCommand(String.format("R2#"))
+                        while (HomeViewModel.suspensionFlow.value == true){
+                            Log.d(TAG, "onTouchDown ")
+                            sendCommand(String.format("R2#"))
+                        }
                     } else if (motionEvent?.action == ACTION_UP) {
                         Log.d(TAG, "onTouchDown ")
+                        HomeViewModel.suspensionFlow.postValue(false)
                         sendCommand(String.format("R0#"))
                     }
                 }
@@ -304,3 +295,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 //
 //    println(string)
 //}
+
+// When you can do the things that I can but you don't
+// and the bad things happen
+// they happen because of you

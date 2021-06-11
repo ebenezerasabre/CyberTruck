@@ -2,8 +2,12 @@ package asabre.com.cybertruck.ui.fragments
 
 //import androidx.appcompat.widget.AppCompatSeekBar
 import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.*
 import android.view.KeyEvent.ACTION_DOWN
@@ -25,7 +29,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val TAG = "HomeFragment"
 
     private lateinit var _binding: FragmentHomeBinding
-    private lateinit var controlClass: ControlClass
+//    private lateinit var controlClass: ControlClass
 
 
     override fun onCreateView(
@@ -81,18 +85,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         _binding.bluetooth.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_bluetoothFragment)
+//            findNavController().navigate(R.id.action_homeFragment_to_bluetoothFragment)
+//            findNavController().navigate(R.id.action_homeFragment_to_bleDevicesFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_scanFragment)
         }
     }
 
     private fun connectedIndicator(){
-        controlClass = ControlClass
-//        controlClass.connectToDevice()
-        controlClass.bluetoothDeviceConnected.observe(viewLifecycleOwner, {
-            if(it){
-                _binding.tvConnected.text = String.format("connected")
-            }
-        })
+        /** connected */
+
+//        controlClass = ControlClass
+////        controlClass.connectToDevice()
+//        controlClass.bluetoothDeviceConnected.observe(viewLifecycleOwner, {
+//            if(it){
+//                _binding.tvConnected.text = String.format("connected")
+//            }
+//        })
+
+
     }
 
 
@@ -102,8 +112,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         leftSeekBar()
         rightSeekBar()
         ludacrisLaunch()
-
         setBreak()
+        setBatteryImage()
     }
 
 
@@ -128,7 +138,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun rightSeekBar(){
-        var currentValue: Int = 0
+        var currentValue = 0
         _binding.rightSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 currentValue = mapRange(p1, IntRange(0, 100), IntRange(0, 255))
@@ -228,7 +238,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun sendCommand(input: String){
-        controlClass.sendCommand(input)
+//        controlClass.sendCommand(input)
+
+        Log.d(TAG, "sendCommand: with string $input")
+        StartClass.writeCharacters(input)
+
+
     }
 
 
@@ -239,6 +254,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
 
+    private fun setBatteryImage(){
+        HomeViewModel.batteryPercentage.observe(viewLifecycleOwner, {
+            when(HomeViewModel.batteryPercentage.value?.toInt()) {
+                in 0..24 -> {_binding.batteryImg.setImageResource(R.drawable.battery20)}
+                in 25..54 -> {_binding.batteryImg.setImageResource(R.drawable.battery30)}
+                in 55..64 -> {_binding.batteryImg.setImageResource(R.drawable.battery50)}
+                in 65..84 -> {_binding.batteryImg.setImageResource(R.drawable.battery70)}
+                in 85..94 -> {_binding.batteryImg.setImageResource(R.drawable.battery90)}
+                in 95..100 -> {_binding.batteryImg.setImageResource(R.drawable.battery100)}
+            }
+        })
+    }
+
+// > 94 100
+//    94 - 85 90
+//  84 -65 - 70
+//    64 - 55  50
+    //  54 - 25  30
+    // 24 - 0 20
+//
 
 
 
