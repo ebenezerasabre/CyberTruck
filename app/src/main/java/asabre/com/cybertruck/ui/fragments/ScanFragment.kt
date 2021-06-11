@@ -72,9 +72,9 @@ class ScanFragment: Fragment(R.layout.scan_fragment), EasyPermissions.Permission
         // set control class
 //        controlClass = ControlClass
 
-        _binding.startScanning.setOnClickListener {
-            startBleScan()
-        }
+//        _binding.startScanning.setOnClickListener {
+//            startBleScan()
+//        }
     }
 
     override fun onStart() {

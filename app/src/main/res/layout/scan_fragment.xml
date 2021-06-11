@@ -26,30 +26,32 @@
             android:textSize="30sp"
             />
 
-        <LinearLayout
-            android:id="@+id/start_scanning"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/connect_msg_scan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/andika"
-                android:text="Start scanning"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                />
-            <ImageView
-                android:id="@+id/refreshPairedDevice_scan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_refresh_24"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="32dp"
-                />
-        </LinearLayout>
+
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/start_scanning"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            >-->
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/connect_msg_scan"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/andika"-->
+<!--                android:text="Start scanning"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="18sp"-->
+<!--                />-->
+<!--            <ImageView-->
+<!--                android:id="@+id/refreshPairedDevice_scan"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_baseline_refresh_24"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                />-->
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 
